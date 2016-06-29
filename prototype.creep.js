@@ -167,6 +167,20 @@ Creep.prototype.sourceCollection = function(idCollection)
     return false;
 };
 
+Creep.prototype.healCreep = function()
+{
+    var target = this.pos.findClosestByRange(FIND_MY_CREEPS, {
+        filter: function(object) {
+            return object.hits < object.hitsMax;
+        }
+    });
+    if(target) {
+        if(this.heal(target) == ERR_NOT_IN_RANGE) {
+            this.moveTo(target);
+            this.say('You will be okay!');
+        }
+    }
+}
 
 
 
